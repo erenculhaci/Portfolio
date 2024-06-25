@@ -95,4 +95,49 @@ const scrollActive = () =>{
 }
 
 window.addEventListener('scroll', scrollActive)
+
 /*=============== SCROLL REVEAL ANIMATION ===============*/
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 2500,
+    delay: 400,
+    //reset: true //Animations repeat
+})
+
+sr.reveal(`.home__data, .home__social, .contact__container, .footer__container`)
+sr.reveal(`.home__image`, {origin: 'bottom'})
+sr.reveal(`.about__data, .skills__data`, {origin: 'left'})
+sr.reveal(`.about__image, .skills__content`, {origin: 'right'})
+sr.reveal(`.services__card, .projects__card`, {interval : 100})
+
+/*=============== DARK LIGHT THEME ===============*/
+document.addEventListener('DOMContentLoaded', () => {
+    const sunIcon = document.getElementById('theme-toggle-sun');
+    const moonIcon = document.getElementById('theme-toggle-moon');
+    const body = document.body;
+
+    // Check for saved user preference
+    if (localStorage.getItem('theme') === 'light') {
+        body.classList.add('light-mode');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+    }
+
+    const toggleTheme = () => {
+        body.classList.toggle('light-mode');
+        if (body.classList.contains('light-mode')) {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+            localStorage.setItem('theme', 'light');
+        } else {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+            localStorage.setItem('theme', 'dark');
+        }
+    };
+
+    sunIcon.addEventListener('click', toggleTheme);
+    moonIcon.addEventListener('click', toggleTheme);
+});
+
